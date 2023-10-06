@@ -1,6 +1,26 @@
-//will come back to make this a singleton later - Liam
+#include <iostream>
+using namespace std;
 
-PathKey()
+class PathKey
 {
-  String path; //contains the path 
-}
+  private:
+    static PathKey* instancePtr; //creates a pointer that points to the instance
+    string path = "n/a"; //contains the path 
+
+    public:
+        //
+        static PathKey* getInstance()
+        {
+            if(instancePtr == NULL)
+            {
+              instancePtr = new PathKey();
+            }
+            
+            return instancePtr;
+        }
+
+        string getPath()
+        {
+            return path;
+        }
+};
