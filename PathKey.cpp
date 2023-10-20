@@ -20,7 +20,7 @@ PathKey::PathKey()
         for(int i=1; i<=pairLength; i++)
         {
             // Retrieve a random number between 65 and 122
-            // Offset = 65
+            // Offset = 48
             // Range = 122
             //gives us the ASCII value of all alphanumeric characters (A-Z, a-z)
             //and some special characters
