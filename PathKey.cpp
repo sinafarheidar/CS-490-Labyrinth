@@ -24,8 +24,8 @@ PathKey::PathKey()
             // Range = 122
             //gives us the ASCII value of all alphanumeric characters (A-Z, a-z)
             //and some special characters
-            random = (48 + (rand() % 74)) -'\0';
-            gate = gate + random; //converts the number to char
+            random = (48 + (rand() % 74)) -'\0'; //converts the number to char
+            gate = gate + random;
         }
 
         gate = gate + '-'; //adds a seperator between gates/keys
