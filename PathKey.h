@@ -8,4 +8,8 @@ class PathKey
     public:
         PathKey();
         void PrintKey();
+        string getPath() const {
+            return path;
+        }
+        
 };
