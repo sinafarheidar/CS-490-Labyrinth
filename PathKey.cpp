@@ -1,9 +1,14 @@
 #include "PathKey.h"
+#include <stdlib.h>
+#include "mysql_connection.h"
+#include "cppconn/driver.h"
+#include "cppconn/exception.h"
+#include "cppconn/resultset.h"
+#include "cppconn/prepared_statement.h"
+using namespace std;
 
 PathKey::PathKey()
 {
-    cout << "hello" << endl;
-
     string key;
     string gate;
     int keySize = 4; //number of key/gate pairs
@@ -50,4 +55,43 @@ PathKey::PathKey()
 void PathKey::PrintKey()
 {
     cout << "The key is: " << path << endl;
+};
+
+void PathKey::UpdateDatabase()
+{
+    sql::Driver *driver;
+	sql::Connection *con;
+	sql::Statement *stmt;
+	sql::PreparedStatement *pstmt;
+
+    const string server = "localhost";
+    const string username = "root";
+    const string password = "root";
+
+
+	try
+	{
+		driver = get_driver_instance();
+		con = driver->connect(server, username, password);
+	}
+	catch (sql::SQLException e)
+	{
+		cout << "Could not connect to server. Error message: " << e.what() << endl;
+		system("pause");
+		exit(1);
+	}
+
+	//con->setSchema("CS490");
+
+    PathKey p;
+    string toInsert = p.getPath();
+
+	pstmt = con->prepareStatement("INSERT INTO KeyTable(pathKeys) VALUES(?)");
+	pstmt->setString(1, toInsert);
+	pstmt->execute();
+	cout << "New key inserted." << endl;
+
+	delete pstmt;
+	delete con;
+	system("pause");
 };
